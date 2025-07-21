@@ -5,6 +5,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,9 +19,14 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 
+import com.mysql.jdbc.Driver;
+
+import fileutility.ExcelUtility;
 import fileutility.PropertyFileUtility;
+import javautility.JavaUtility;
 import objectrepository.HomePage;
 import objectrepository.LoginPage;
+import webdriverutility.WebDriverUtility;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
@@ -24,12 +34,30 @@ import org.testng.annotations.AfterSuite;
 
 public class BaseClass {
 	public PropertyFileUtility pLib = new PropertyFileUtility();
+	public ExcelUtility eLib = new ExcelUtility();
+	public JavaUtility jLib = new JavaUtility();
+	public WebDriverUtility wLib = new WebDriverUtility();
 	public WebDriver driver = null;
 	public static WebDriver sdriver = null;
-	
+	Connection conn;
 	@BeforeSuite
-	public void beforeSuite() {
-		System.out.println("Establish the database connection");
+	public String beforeSuite(String SQLQuery,int colIndex) throws SQLException {
+		
+		Driver driver=new Driver();
+		DriverManager.registerDriver(driver);
+		
+		//Connect to the database
+	    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ninza_crm","root","root");
+		
+		//Create SQL Statement
+	   Statement stat = conn.createStatement();
+	   
+	   //Execute Query
+	   ResultSet result = stat.executeQuery(SQLQuery);
+	   
+	   System.out.println("Establish the database connection");
+	   
+	   return result.getString(colIndex);
 
 	}
 
@@ -82,7 +110,8 @@ public class BaseClass {
 	}
 
 	@AfterSuite
-	public void afterSuite() {
+	public void afterSuite() throws SQLException {
+		conn.close();
 		System.out.println("Close database connection");
 	}
 

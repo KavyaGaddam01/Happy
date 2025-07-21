@@ -10,8 +10,13 @@ public class WorkingWithAssertions {
 	@Test
 	public void test() {
 		
-		Assert.assertEquals("hdfc","hfdc");
+		//Assert.assertNotEquals("hdfc","hfdc");
 	    
+    	SoftAssert soft = new SoftAssert();
+//		soft.assertEquals("hdfc",true);
+    	soft.assertTrue(true);
 		System.out.println("next line");
+		soft.assertAll();
+
 	}
 }

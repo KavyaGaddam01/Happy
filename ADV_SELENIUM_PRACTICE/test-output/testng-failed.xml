@@ -3,19 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="campaign.CreateCampaignTest">
+      <class name="testng.WorkingWithAssertions">
         <methods>
-          <include name="beforeTest"/>
-          <include name="afterMethod"/>
-          <include name="afterSuite"/>
-          <include name="afterClass"/>
-          <include name="beforeSuite"/>
-          <include name="beforeMethod"/>
-          <include name="afterTest"/>
-          <include name="beforeClass"/>
-          <include name="createCampaignWithMandatoryFieldsTest"/>
+          <include name="test"/>
         </methods>
-      </class> <!-- campaign.CreateCampaignTest -->
+      </class> <!-- testng.WorkingWithAssertions -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

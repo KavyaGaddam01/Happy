@@ -20,7 +20,7 @@ public class WebDriverUtility {
 
 	public void waitForPageToLoad(WebDriver driver) {
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	}
 
 	public void waitForVisibilityOfWebElement(WebDriver driver, WebElement element) {

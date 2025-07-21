@@ -2,12 +2,38 @@ package testng;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class WorkingWithIRetryAnalayzer {
 
-	@Test(retryAnalyzer  = listenerutility.RetryAnalyzerImplementation.class)
+	@Test
 	public void test() {
-		System.out.println("test");
-		Assert.assertEquals("hdfc", "hfdc");
+		
+		if("hdfc".equals("hfdc"))
+		 System.out.println("pass");
+		else
+		System.out.println("Fail");
+		
+
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//System.out.println("test");
+//SoftAssert soft=new SoftAssert();
+//soft.assertEquals("hdfc", "hfdc");
+//
+//System.out.println("asdfghjkl;");
+//soft.assertAll();

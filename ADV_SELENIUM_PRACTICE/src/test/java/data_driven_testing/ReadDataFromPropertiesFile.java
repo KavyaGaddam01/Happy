@@ -11,20 +11,15 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import fileutility.PropertyFileUtility;
+
 public class ReadDataFromPropertiesFile {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-
-		//Create java representation object of physical file
-		FileInputStream fis=new FileInputStream("C:\\Users\\Kavya 1\\Desktop\\LoginData.properties");
-		//Create an object of Properties
-		Properties prop=new Properties();
-		//Load all the keys
-		prop.load(fis);
-		String browser = prop.getProperty("Browser");
-		String url = prop.getProperty("Url");
-		String username = prop.getProperty("Username");
-		String password = prop.getProperty("Password");
+    
+		PropertyFileUtility pLib=new PropertyFileUtility();
+		 
+		String browser=pLib.readDataFromPropertiesFile("Browser");
 		
 		WebDriver driver = null;
 		if(browser.equalsIgnoreCase("CHROME"))
@@ -40,9 +35,10 @@ public class ReadDataFromPropertiesFile {
 		// Login to NINZA CRM
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-		driver.get(url);
-		driver.findElement(By.id("username")).sendKeys(username);
-		driver.findElement(By.id("inputPassword")).sendKeys(password);
+		driver.get(pLib.readDataFromPropertiesFile("Url"));
+		
+		driver.findElement(By.id("username")).sendKeys(pLib.readDataFromPropertiesFile("Username"));
+		driver.findElement(By.id("inputPassword")).sendKeys(pLib.readDataFromPropertiesFile("Password"));
 		driver.findElement(By.xpath("//button[text()='Sign In']")).click();
 	}
 }

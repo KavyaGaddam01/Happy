@@ -18,6 +18,7 @@ public class RobotClass {
 		driver.get("https://www.facebook.com/r.php?entry_point=login");
 		Robot robot=new Robot();
 		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
 		Thread.sleep(2000);
 		robot.keyPress(KeyEvent.VK_TAB);
 		Thread.sleep(2000);
